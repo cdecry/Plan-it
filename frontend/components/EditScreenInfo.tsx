@@ -1,20 +1,17 @@
 import * as WebBrowser from 'expo-web-browser';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity ,Image} from 'react-native';
 
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 
+
+
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
     <View>
-      <View style={styles.getStartedContainer}>
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Open up the code for this screen:
-        </Text>
+      <View style={styles.helpContainer}>
+        
 
         <View
           style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
@@ -23,13 +20,48 @@ export default function EditScreenInfo({ path }: { path: string }) {
           <MonoText>{path}</MonoText>
         </View>
 
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Change any of the text, save the file, and your app will automatically update.
-        </Text>
+            </View>
+    <View style = {styles.container2}>
+      <View style={ styles.waterContainer}> 
+      <Image style={styles.imageContainer}
+      source = {require('./drop.png')}
+      /> 
+
+      <Text
+      style={styles.getStartedText}
+          >
+        # hours  
+      </Text>
+      <Text style={styles.bodyText}
+      >since you drank water</Text>
+      <View>
+
       </View>
+
+
+
+      </View>
+
+<View style={ styles.foodContainer}> 
+<Image style={styles.imageContainer2}
+source = {require('./food.png')}
+/> 
+
+<Text
+style={styles.getStartedText}
+    >
+  # hours  
+</Text>
+<Text style={styles.bodyText}
+>since you ate food</Text>
+<View>
+
+</View>
+</View>
+
+
+      
+    </View>
 
       <View style={styles.helpContainer}>
         <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
@@ -61,14 +93,55 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   getStartedText: {
-    fontSize: 17,
+    fontSize: 22,
+    color: "rgba(255,255,255,1)",
+    lineHeight: 24,
+    fontWeight: 'bold',
+    padding:6,
+    fontFamily: 'Avenir',
+    textAlign: 'center',
+  },
+
+  bodyText: {
+    fontSize: 14,
+    padding:3,
+    fontFamily: 'Avenir',
+    color: "rgba(255,255,255,0.9)",
     lineHeight: 24,
     textAlign: 'center',
   },
+
   helpContainer: {
     marginTop: 15,
-    marginHorizontal: 20,
     alignItems: 'center',
+  },
+
+  waterContainer: {
+    backgroundColor: 'rgba(69,16,102,0.8)',
+    
+    borderRadius: 40/2,
+      height: 130,
+      width: 170,
+      marginTop: 15,
+      padding:11,
+      marginHorizontal: 20,
+     
+      alignItems: 'center',
+  },
+  foodContainer: {
+    backgroundColor: 'rgba(140,10,190,0.8)',
+    paddingLeft: 0,
+    paddingright: 0,
+    marginLeft: 0,
+    marginright: 0,
+    
+    borderRadius: 40/2,
+      height: 130,
+      width: 170,
+      marginTop: 15,
+      padding:11,
+      marginHorizontal: 20,
+      alignItems: 'center',
   },
   helpLink: {
     paddingVertical: 15,
@@ -76,4 +149,26 @@ const styles = StyleSheet.create({
   helpLinkText: {
     textAlign: 'center',
   },
+
+  imageContainer : {height: 28,
+    marginTop: 6,
+    marginBottom: 6,
+  marginRight: 80,
+  imageAlign: 'left',
+width: 17,
+
+  },
+
+imageContainer2 : {height: 27,
+  marginTop: 6,
+  marginBottom: 6,
+marginRight: 80,
+imageAlign: 'left',
+width: 36,
+
+  },
+  container2 : {flexDirection:'row',
+
+  }
+
 });
