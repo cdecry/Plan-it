@@ -1,17 +1,30 @@
 import { StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
-
+import { useState } from 'react'
 
 import FoodWaterStatsComp from '../components/FoodWaterStatsComp';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import AddTaskModal from '../components/AddTaskModal'
+
 let windowHeight = Dimensions.get('window').height;
-let windowWidth = Dimensions.get('window').width;
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const onShowPopup = () => {
+    setModalVisible(true)
+  }
+
+  const onClosePopup = () => {
+    setModalVisible(false)
+  }
+
   return (
     <View style={styles.container}>
+      <AddTaskModal visible = {modalVisible} closePopup = {onClosePopup} addItem = {onClosePopup}/>
       <LinearGradient
         colors={["rgba(255, 255, 255, 1)", '#7E14AF', '#4B056C']}
         style={styles.linearGradient}
@@ -27,7 +40,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       <View style={styles.listView}>
       </View>
 
-      <TouchableOpacity style={styles.floatingButton} activeOpacity={0.7}>
+      <TouchableOpacity style={styles.floatingButton} activeOpacity={0.7} onPress={onShowPopup}>
         <Image style={styles.addButtonImage} source = {require('../assets/images/add.png')}/> 
       </TouchableOpacity>
 
@@ -59,7 +72,7 @@ const styles = StyleSheet.create({
   listView : {
     width: "100%",
     height: "60%",
-    backgroundColor: "#501471"
+    backgroundColor: "#500076"
   },
 
   floatingButton : {
