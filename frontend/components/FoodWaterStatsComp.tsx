@@ -1,27 +1,27 @@
-import { StyleSheet, Image, Dimensions } from 'react-native';
+import { StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { Text, View } from './Themed';
 
 let windowHeight = Dimensions.get('window').height;
 
-export default function FoodWaterStatsComp(props: {waterTime: string, foodTime: string}) {
+export default function FoodWaterStatsComp(props: {waterTime: string, foodTime: string, resetWaterTime: (VoidFunction), resetFoodTime: (VoidFunction)}) {
   return (
       <View style={styles.ComponentContainer}>
 
-        <View style={styles.waterContainer}>
+        <TouchableOpacity style={styles.waterContainer} onPress={props.resetWaterTime}>
 
           <Image style={styles.waterAssetStyle} source={require('./drop.png')} />
           <Text style={styles.statisticsTextStyle}> {props.waterTime} hours </Text>
           <Text style={styles.bodyText}> Since you drank water</Text>
 
-        </View>
+        </TouchableOpacity>
 
-        <View style={styles.foodContainer}>
+        <TouchableOpacity style={styles.foodContainer} onPress={props.resetFoodTime}>
 
           <Image style={styles.foodAssetStyle} source={require('./food.png')} />
           <Text style={styles.statisticsTextStyle}> {props.foodTime} hours </Text>
           <Text style={styles.bodyText}> Since you've eaten food</Text>
 
-        </View>
+        </TouchableOpacity>
 
       </View>
   );
