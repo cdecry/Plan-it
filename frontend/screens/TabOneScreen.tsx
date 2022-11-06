@@ -16,6 +16,8 @@ let windowWidth = Dimensions.get('window').width;
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [waterTime, setWaterTime] = useState(2); //just random values for now
+  const [foodTime, setFoodTime] = useState(4);
 
   const onShowPopup = () => {
     setModalVisible(true)
@@ -23,6 +25,14 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 
   const onClosePopup = () => {
     setModalVisible(false)
+  }
+
+  const resetWaterTime = () => {
+    setWaterTime(0)
+  }
+
+  const resetFoodTime = () => {
+    setFoodTime(0)
   }
 
   return (
@@ -36,7 +46,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
         >
 
         <Text style={styles.titleText}> Plan-It! </Text>
-        <FoodWaterStatsComp waterTime='1' foodTime = '1'/>
+        <FoodWaterStatsComp waterTime={String(waterTime)} foodTime={String(foodTime)} resetWaterTime={resetWaterTime} resetFoodTime={resetFoodTime} />
 
       </LinearGradient>
       
