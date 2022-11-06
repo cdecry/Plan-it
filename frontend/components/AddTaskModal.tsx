@@ -2,6 +2,7 @@ import { Modal, Dimensions, StyleSheet, View, Text, TouchableOpacity, TouchableW
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useState } from 'react';
 import { Button, Pressable } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 let windowHeight = Dimensions.get('window').height;
 let popupHeight = 0.45*windowHeight;
@@ -35,6 +36,25 @@ let popupHeight = 0.45*windowHeight;
 
 */
 
+export const storeData = async (value: any) => {
+    try {
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem('item', jsonValue);
+    } catch (e) {
+        // saving error
+    }
+}
+
+
+export const getData = async () => {
+    try {
+        const jsonValue = await AsyncStorage.getItem('item');
+        return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch(e) {
+        // error reading value
+    }
+}
+  
 
 const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), addItem : (VoidFunction) }) => {
 
@@ -42,7 +62,8 @@ const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), ad
     const defaultAMPM = defaultTimeArr[2].split(' ')[1];
     const defaultTime = defaultTimeArr[0] + ':' + defaultTimeArr[1] + ' ' + defaultAMPM;
 
-    const [pickedDate, setDate] = useState(new Date());
+    const [taskName, setTaskName] = useState('');
+    const [pickedDate, setDate] = useState((new Date()).toLocaleDateString());
     const [pickedTime, setTime] = useState(defaultTime);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
@@ -63,8 +84,8 @@ const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), ad
         setTimePickerVisibility(false);
     };
 
-    const handleConfirmDate = (date: any) => {
-        setDate(date);
+    const handleConfirmDate = (date: Date) => {
+        setDate(date.toLocaleDateString());
         hideDatePicker();
     };
 
@@ -77,6 +98,12 @@ const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), ad
     };
 
     const addItem = () => {
+        const obj = JSON.parse('{"name":"' + taskName + '", "date":"' + pickedDate + '", "time":"' + pickedTime + '"}');
+        storeData(obj).then(() => {
+            getData().then((value) => {
+                console.log(value);
+            })
+        });
         props.addItem()
         props.closePopup()
     }
@@ -98,13 +125,14 @@ const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), ad
                           <Text style={styles.modalText}>Task Name </Text>
                             <TextInput 
                               style={styles.transactionInput}
+                              onChangeText={text => {setTaskName(text)}}
                               keyboardType="default"
                               textAlign='center'
                             />
 
                             <Text style={styles.modalText}> Date (YY/MM/DD) </Text>
                             <Pressable style={styles.transactionInput} onPress={showDatePicker}>
-                                <Text style={styles.dateTimeText}>{pickedDate.toLocaleDateString()}</Text>
+                                <Text style={styles.dateTimeText}>{pickedDate}</Text>
                             </Pressable>
                             <DateTimePickerModal
                                 isVisible={isDatePickerVisible}
