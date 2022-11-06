@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
+
 
 import FoodWaterStatsComp from '../components/FoodWaterStatsComp';
 import { Text, View } from '../components/Themed';
@@ -6,7 +7,7 @@ import { RootTabScreenProps } from '../types';
 import { LinearGradient } from 'expo-linear-gradient';
 
 let windowHeight = Dimensions.get('window').height;
-let popupHeight = 0.45*windowHeight;
+let windowWidth = Dimensions.get('window').width;
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   return (
@@ -25,6 +26,10 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       
       <View style={styles.listView}>
       </View>
+
+      <TouchableOpacity style={styles.floatingButton} activeOpacity={0.7}>
+        <Image style={styles.addButtonImage} source = {require('../assets/images/add.png')}/> 
+      </TouchableOpacity>
 
     </View>
   );
@@ -56,4 +61,23 @@ const styles = StyleSheet.create({
     height: "60%",
     backgroundColor: "#501471"
   },
+
+  floatingButton : {
+    height: 0.09 * windowHeight,
+    width: 0.09 * windowHeight,
+    borderRadius: 100,
+    position: 'absolute',
+    top: "89%",
+    left: "82%",
+    right: 0,
+    bottom: 0
+  },
+
+  addButtonImage : {
+    height: 0.08 * windowHeight,
+    width: 0.08 * windowHeight,
+    marginTop: 6,
+    marginBottom: 6,
+    imageAlign: 'left',
+    },
 });
