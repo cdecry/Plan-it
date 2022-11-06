@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     transactionInput: {
         paddingLeft: '1%',
         paddingRight: '1%',
-      fontSize: '20%',
+      fontSize: 20,
       backgroundColor: '#E3EFF1',
       marginTop: 0,
       marginBottom: "2%",
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         marginTop: "3%"
     },
     buttonText: {
-        fontSize: '25%',
+        fontSize: 20,
         marginTop: "7%",
         textAlign: 'center',
         color: "white"

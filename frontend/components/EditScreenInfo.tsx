@@ -48,12 +48,6 @@ export default function EditScreenInfo() {
     );
 }
 
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet'
-  );
-}
-
 
 
 const styles = StyleSheet.create({
