@@ -5,7 +5,7 @@ import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 
-
+import { sendNotification } from '../AppNotifications';
 
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
