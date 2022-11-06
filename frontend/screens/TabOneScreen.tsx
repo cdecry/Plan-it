@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Dimensions, Button, TouchableOpacity, Image } from 'react-native';
 import { useState } from 'react'
 
 import FoodWaterStatsComp from '../components/FoodWaterStatsComp';
@@ -9,6 +10,20 @@ import { LinearGradient } from 'expo-linear-gradient';
 import AddTaskModal from '../components/AddTaskModal'
 
 let windowHeight = Dimensions.get('window').height;
+import AddTaskModal from '../components/AddTaskModal';
+let windowWidth = Dimensions.get('window').width;
+
+export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const onShowPopup = () => {
+      setModalVisible(true)
+    }
+
+    const onClosePopup = () => {
+      setModalVisible(false)
+    }
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
 
@@ -30,7 +45,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
         style={styles.linearGradient}
         end={{ x:1, y:2 }}
         start = {{x: 0.4, y: -1.2}}
-      >
+        >
 
         <Text style={styles.titleText}> Plan-It! </Text>
         <FoodWaterStatsComp waterTime='1' foodTime = '1'/>

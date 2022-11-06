@@ -147,7 +147,6 @@ width: 36,
 
   },
   container2 : {flexDirection:'row',
-
   },
   addbutton : {height: 30,
     width:60,
