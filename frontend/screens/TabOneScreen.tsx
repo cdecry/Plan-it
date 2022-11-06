@@ -7,8 +7,9 @@ import { RootTabScreenProps } from '../types';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import TaskItem from '../components/TaskItem'
-import AddTaskModal from '../components/AddTaskModal';
+import AddTaskModal, { getData } from '../components/AddTaskModal';
 import TaskListComponent from '../components/TaskListComponent';
+import { sendNotification } from '../AppNotifications';
 
 let windowHeight = Dimensions.get('window').height;
 let windowWidth = Dimensions.get('window').width;
@@ -16,6 +17,29 @@ let windowWidth = Dimensions.get('window').width;
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
 
+    getData(-7).then(num => {
+        console.log('food int ' + num);
+      })
+      getData(-77).then(num => {
+        getData(-7).then(inter => {
+            if (((new Date()).getDate() - num) >= inter)
+                sendNotification(global.token, "Plan-it!", "Please remember to eat!");
+          })
+        
+      })
+     
+      getData(-8).then(num => {
+        console.log('water int ' + num);
+      })
+      getData(-88).then(num => {
+        getData(-8).then(inter => {
+            if (((new Date()).getDate() - num) >= inter)
+                sendNotification(global.token, "Plan-it!", "Please remember to stay hydrated!");
+            else
+                console.log(num);
+          })
+      })
+      
   const [modalVisible, setModalVisible] = useState(false);
   const [waterTime, setWaterTime] = useState(2); //just random values for now
   const [foodTime, setFoodTime] = useState(4);

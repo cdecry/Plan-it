@@ -1,13 +1,31 @@
+import { useState } from 'react';
 import { StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { storeData, storeNumberData } from './AddTaskModal';
 import { Text, View } from './Themed';
 
 let windowHeight = Dimensions.get('window').height;
 
 export default function FoodWaterStatsComp(props: {waterTime: string, foodTime: string, resetWaterTime: (VoidFunction), resetFoodTime: (VoidFunction)}) {
-  return (
+  
+
+    const updateWater = () => {
+        props.resetWaterTime();
+        setLastDrank(new Date());
+        storeNumberData(-88, new Date().getDate());
+    }
+
+    const updateFood = () => {
+        props.resetFoodTime();
+        setLastEaten(new Date());
+        storeNumberData(-77, new Date().getDate());
+    }
+
+    const [lastEaten, setLastEaten] = useState(new Date());
+    const [lastDrank, setLastDrank] = useState(new Date());
+    return (
       <View style={styles.ComponentContainer}>
 
-        <TouchableOpacity style={styles.waterContainer} onPress={props.resetWaterTime}>
+        <TouchableOpacity style={styles.waterContainer} onPress={updateWater}>
 
           <Image style={styles.waterAssetStyle} source={require('./drop.png')} />
           <Text style={styles.statisticsTextStyle}> {props.waterTime} hours </Text>
@@ -15,7 +33,7 @@ export default function FoodWaterStatsComp(props: {waterTime: string, foodTime: 
 
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.foodContainer} onPress={props.resetFoodTime}>
+        <TouchableOpacity style={styles.foodContainer} onPress={updateFood}>
 
           <Image style={styles.foodAssetStyle} source={require('./food.png')} />
           <Text style={styles.statisticsTextStyle}> {props.foodTime} hours </Text>

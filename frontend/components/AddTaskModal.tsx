@@ -40,7 +40,7 @@ declare global {
     var dataList: any[];
   }
 
-export const storeNumberData = async (key: number, item: number) => {
+export const storeNumberData = async (key: number, item: any) => {
     try {
       await AsyncStorage.setItem(String(key), String(item));
     } catch(e) {
