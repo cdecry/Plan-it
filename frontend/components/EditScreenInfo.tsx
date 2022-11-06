@@ -8,77 +8,56 @@ import { Text, View } from './Themed';
 import { sendNotification } from '../AppNotifications';
 
 export default function EditScreenInfo({ path }: { path: string }) {
-  return (
-    <View>
-      <View style={styles.helpContainer}>
-        
+    return (
+        <View>
+            <View>
+                <View style={styles.helpContainer}>     
+                    <View
+                        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+                        darkColor="rgba(255,255,255,0.05)"
+                        lightColor="rgba(0,0,0,0.05)">
+                            <MonoText>{path}</MonoText>
+                    </View>
+                </View>
+                
+                <View style = {styles.container2}>
+                    <View style={ styles.waterContainer}> 
+                        <Image style={styles.imageContainer} source = {require('./drop.png')}/> 
+                        <Text style={styles.getStartedText}>  # hours  </Text>
+                        <Text style={styles.bodyText}>since you drank water</Text>
+                    </View>
 
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
-        </View>
+                    <View style={ styles.foodContainer}> 
+                        <Image style={styles.imageContainer2} source = {require('./food.png')}/> 
+                        <Text style={styles.getStartedText}>  # hours  </Text>
+                        <Text style={styles.bodyText}>since you ate food</Text>
+                    </View>
+                </View>
 
+                <View style={styles.helpContainer}>
+                    <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
+                        <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
+                            Tap here if your app doesn't automatically update after making changes
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-    <View style = {styles.container2}>
-      <View style={ styles.waterContainer}> 
-      <Image style={styles.imageContainer}
-      source = {require('./drop.png')}
-      /> 
-
-      <Text
-      style={styles.getStartedText}
-          >
-        # hours  
-      </Text>
-      <Text style={styles.bodyText}
-      >since you drank water</Text>
-      <View>
-
-      </View>
-
-
-
-      </View>
-
-<View style={ styles.foodContainer}> 
-<Image style={styles.imageContainer2}
-source = {require('./food.png')}
-/> 
-
-<Text
-style={styles.getStartedText}
-    >
-  # hours  
-</Text>
-<Text style={styles.bodyText}
->since you ate food</Text>
-<View>
-
-</View>
-</View>
-
-
-      
-    </View>
-
-      <View style={styles.helpContainer}>
-        <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-          <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-            Tap here if your app doesn't automatically update after making changes
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
+            
+            
+        </View>
+    );
 }
+
+
+
 
 function handleHelpPress() {
   WebBrowser.openBrowserAsync(
     'https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet'
   );
 }
+
+
 
 const styles = StyleSheet.create({
   getStartedContainer: {
@@ -168,6 +147,18 @@ width: 36,
 
   },
   container2 : {flexDirection:'row',
-  }
+  },
+  addbutton : {height: 30,
+    width:60,
+    borderRadius: 40/2,
+    position: 'absolute', top: 310, left: 333, right: 0, bottom: 0
+  },
+  imageContainer3 : {height: 33,
+    marginTop: 6,
+    marginBottom: 6,
+  imageAlign: 'left',
+  width: 33,
+  
+    },
 
 });
