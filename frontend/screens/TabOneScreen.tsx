@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import TaskItem from '../components/TaskItem'
 import AddTaskModal from '../components/AddTaskModal';
+import TaskListComponent from '../components/TaskListComponent';
 
 let windowHeight = Dimensions.get('window').height;
 let windowWidth = Dimensions.get('window').width;
@@ -51,7 +52,8 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       </LinearGradient>
       
       <View style={styles.listView}>
-        <TaskItem task="Submit project" date="Nov 6, 2022" time="11:00"/>
+        {/* <TaskItem task="Submit project" date="Nov 6, 2022" time="11:00"/> */}
+        <TaskListComponent/>
       </View>
 
       <TouchableOpacity style={styles.floatingButton} activeOpacity={0.7} onPress={onShowPopup}>

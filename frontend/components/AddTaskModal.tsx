@@ -36,23 +36,57 @@ let popupHeight = 0.45*windowHeight;
 
 */
 
-export const storeData = async (value: any) => {
-    try {
-        const jsonValue = JSON.stringify(value);
-        await AsyncStorage.setItem('item', jsonValue);
-    } catch (e) {
-        // saving error
-    }
-}
+declare global {
+    var dataList: any[];
+  }
 
-
-export const getData = async () => {
+export const storeNumberData = async (key: number, item: number) => {
     try {
-        const jsonValue = await AsyncStorage.getItem('item');
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
+      await AsyncStorage.setItem(String(key), String(item));
     } catch(e) {
-        // error reading value
+      // save error
     }
+  
+    console.log('Stored number data.')
+  }
+
+export const storeData = async (key: number, item: any) => {
+    try {
+      const jsonValue = JSON.stringify(item)
+      await AsyncStorage.setItem(String(key), jsonValue)
+    } catch(e) {
+      // save error
+    }
+  
+    console.log('Done.')
+  }
+
+
+export const getData = async (key: number) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(String(key))
+      return jsonValue != null ? JSON.parse(jsonValue) : null
+    } catch(e) {
+      // read error
+    }
+  
+    console.log('Done.')
+  }
+
+  export const getDataAsNumber = async (key: number) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(String(key))
+      return jsonValue != null ? Number(jsonValue) : null
+    } catch(e) {
+      // read error
+    }
+  
+    console.log('Done.')
+  }
+
+
+const clearAsyncStorage = async() => {
+    AsyncStorage.clear();
 }
   
 
@@ -62,6 +96,7 @@ const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), ad
     const defaultAMPM = defaultTimeArr[2].split(' ')[1];
     const defaultTime = defaultTimeArr[0] + ':' + defaultTimeArr[1] + ' ' + defaultAMPM;
 
+    const [index, increaseIndex] = useState(0);
     const [taskName, setTaskName] = useState('');
     const [pickedDate, setDate] = useState((new Date()).toLocaleDateString());
     const [pickedTime, setTime] = useState(defaultTime);
@@ -99,11 +134,36 @@ const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), ad
 
     const addItem = () => {
         const obj = JSON.parse('{"name":"' + taskName + '", "date":"' + pickedDate + '", "time":"' + pickedTime + '"}');
-        storeData(obj).then(() => {
-            getData().then((value) => {
-                console.log(value);
-            })
-        });
+        
+        getData(-1).then(ind => {
+            storeData(ind, obj).then(() => {
+                getData(0).then((value) => {
+                    console.log(value);
+                })
+            });
+        }).catch(error=>{console.log(error)});
+
+        increaseIndex(index + 1);
+
+        getData(-1).then(ind => {
+            getData(ind).then(objStr => {
+                global.dataList.push(JSON.parse(JSON.stringify(objStr)));
+                // console.log("CHECKING EACH" + JSON.stringify(JSON.parse(JSON.stringify(objStr))));
+                // console.log("GLOBAL: "+ global.dataList);
+            }).catch(error => {console.log(error)});
+        }).catch(error=>{console.log(error)});
+
+        getData(-1).then(current => {
+            storeNumberData(-1, current + 1);
+        })
+
+        getData(-1).then(newIndex => {
+            console.log('storage index:' + newIndex);
+        })
+        console.log('state index: ' + index);
+        
+
+        // clearAsyncStorage();
         props.addItem()
         props.closePopup()
     }
@@ -225,7 +285,7 @@ const styles = StyleSheet.create({
         marginTop: "3%"
     },
     buttonText: {
-        fontSize: 20,
+        fontSize: 25,
         marginTop: "7%",
         textAlign: 'center',
         color: "white"
