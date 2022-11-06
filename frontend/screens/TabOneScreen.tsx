@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 let windowHeight = Dimensions.get('window').height;
 import AddTaskModal from '../components/AddTaskModal';
+import EditScreenInfo from '../components/EditScreenInfo';
 let windowWidth = Dimensions.get('window').width;
 
 

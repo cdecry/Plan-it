@@ -7,80 +7,43 @@ import { Text, View } from './Themed';
 import React, { useState } from 'react'
 
 import { sendNotification } from '../AppNotifications';
-import { Image } from 'react-native';
 
 
 export default function EditScreenInfo() {
 
-  const [hasCheck, setHasCheck] = useState(false);
+    const [hasCheck, setHasCheck] = useState(false);
 
-  const check = () => {
+    const check = () => {
     setHasCheck(!hasCheck);
-  }
+}
 
-  return (
-    <View style={styles.getStartedContainer}>
-      <TouchableOpacity style={styles.componentOpacity} onPress={check}>
-        <Text
-          style={styles.timeStyle}
-          darkColor="#ffffff"
-        >
-          Task: submit reflction
-        </Text>
-
-        {hasCheck &&
-          <Image source={require('./check.png')} style={{ width: 32, height: 32, marginLeft: 20, position: 'absolute', top: 30, left: 8, right: 0, bottom: 0 }}
-          />}
-
-        <Image source={require('./square.png')} style={{ width: 35, height: 35, marginLeft: 20, }}
-        />
-
-
-        <Text
-          style={styles.getStartedText}
-          darkColor="#ffffff"
-        >
-          Date, Time: sunday @ 11:59 pm
-        </Text>
-
-      </TouchableOpacity>
-    </View>
-
+    return (
         <View>
-            <View>
-                <View style={styles.helpContainer}>     
-                    <View
-                        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-                        darkColor="rgba(255,255,255,0.05)"
-                        lightColor="rgba(0,0,0,0.05)">
-                            <MonoText>{path}</MonoText>
-                    </View>
-                </View>
-                
-                <View style = {styles.container2}>
-                    <View style={ styles.waterContainer}> 
-                        <Image style={styles.imageContainer} source = {require('./drop.png')}/> 
-                        <Text style={styles.getStartedText}>  # hours  </Text>
-                        <Text style={styles.bodyText}>since you drank water</Text>
-                    </View>
+            <View style={styles.getStartedContainer}>
+                <TouchableOpacity style={styles.componentOpacity} onPress={check}>
+                    <Text
+                    style={styles.timeStyle}
+                    darkColor="#ffffff"
+                    >
+                    Task: submit reflction
+                    </Text>
 
-                    <View style={ styles.foodContainer}> 
-                        <Image style={styles.imageContainer2} source = {require('./food.png')}/> 
-                        <Text style={styles.getStartedText}>  # hours  </Text>
-                        <Text style={styles.bodyText}>since you ate food</Text>
-                    </View>
-                </View>
+                    {hasCheck &&
+                    <Image source={require('./check.png')} style={{ width: 32, height: 32, marginLeft: 20, position: 'absolute', top: 30, left: 8, right: 0, bottom: 0 }}
+                    />}
 
-                <View style={styles.helpContainer}>
-                    <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-                        <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-                            Tap here if your app doesn't automatically update after making changes
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                    <Image source={require('./square.png')} style={{ width: 35, height: 35, marginLeft: 20, }}
+                    />
+
+                    <Text
+                    style={styles.getStartedText}
+                    darkColor="#ffffff"
+                    >
+                    Date, Time: sunday @ 11:59 pm
+                    </Text>
+
+                </TouchableOpacity>
             </View>
-            
-            
         </View>
     );
 }
@@ -140,7 +103,6 @@ const styles = StyleSheet.create({
     color: "rgba(255,255,255,0.9)",
     lineHeight: 24,
     textAlign: 'center',
-    fontFamily: 'Avenir',
   },
 
   timeStyle: {
