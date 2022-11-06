@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Platform, Pressable, StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
+import EditScreenInfo from '../components/FoodWaterStatsComp';
 import { Text, View } from '../components/Themed';
 
 export default function ModalScreen() {
