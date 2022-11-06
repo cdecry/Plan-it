@@ -1,5 +1,9 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19000,
-  "webpackServerPort": 19006
+    "expoServerPort": 19000,
+    "packagerPort": 19000,
+    "expoServerNgrokUrl": "https://m9-mcp.anonymous.frontend.exp.direct",
+    "packagerNgrokUrl": "https://m9-mcp.anonymous.frontend.exp.direct",
+    "ngrokPid": 17364,
+    "webpackServerPort": null,
+    "packagerPid": null
 }

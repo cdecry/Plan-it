@@ -1,82 +1,54 @@
 import * as WebBrowser from 'expo-web-browser';
-import { StyleSheet, TouchableOpacity , Image} from 'react-native';
+import { StyleSheet, TouchableOpacity ,Image} from 'react-native';
 
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 
-
-
-
+import { sendNotification } from '../AppNotifications';
 
 export default function EditScreenInfo({ path }: { path: string }) {
-  return (
-    <View>
-      <View style={styles.helpContainer}>
-        
+    return (
+        <View>
+            <View>
+                <View style={styles.helpContainer}>     
+                    <View
+                        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+                        darkColor="rgba(255,255,255,0.05)"
+                        lightColor="rgba(0,0,0,0.05)">
+                            <MonoText>{path}</MonoText>
+                    </View>
+                </View>
+                
+                <View style = {styles.container2}>
+                    <View style={ styles.waterContainer}> 
+                        <Image style={styles.imageContainer} source = {require('./drop.png')}/> 
+                        <Text style={styles.getStartedText}>  # hours  </Text>
+                        <Text style={styles.bodyText}>since you drank water</Text>
+                    </View>
 
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
-        </View>
+                    <View style={ styles.foodContainer}> 
+                        <Image style={styles.imageContainer2} source = {require('./food.png')}/> 
+                        <Text style={styles.getStartedText}>  # hours  </Text>
+                        <Text style={styles.bodyText}>since you ate food</Text>
+                    </View>
+                </View>
 
+                <View style={styles.helpContainer}>
+                    <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
+                        <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
+                            Tap here if your app doesn't automatically update after making changes
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-    <View style = {styles.container2}>
-      <View style={ styles.waterContainer}> 
-      <Image style={styles.imageContainer}
-      source = {require('./drop.png')}
-      /> 
-
-      <Text
-      style={styles.getStartedText}
-          >
-        # hours  
-      </Text>
-      <Text style={styles.bodyText}
-      >since you drank water</Text>
-      <View>
-
-      </View>
-
-      </View>
-
-<View style={ styles.foodContainer}> 
-<Image style={styles.imageContainer2}
-source = {require('./food.png')}
-/> 
-
-<Text
-style={styles.getStartedText}
-    >
-  # hours  
-</Text>
-<Text style={styles.bodyText}
->since you ate food</Text>
-
-<View>
-
-</View>
-</View>
-
-
-      
-    </View>
-    
-    <TouchableOpacity style={styles.addbutton} activeOpacity={0.7}>
-    <Image style={styles.imageContainer3}
-      source = {require('./add.png')}
-      /> 
-          <View style={styles.helpContainer} />
-          
-        </TouchableOpacity>
-    </View>
-    
-
-
-    
-  );
+            
+            <TouchableOpacity style={styles.addbutton} activeOpacity={0.7}>
+                <Image style={styles.imageContainer3} source = {require('./add.png')}/> 
+                <View style={styles.helpContainer} />
+            </TouchableOpacity>
+        </View>
+    );
 }
 
 
