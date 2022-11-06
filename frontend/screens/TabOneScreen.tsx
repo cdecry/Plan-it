@@ -39,6 +39,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       </LinearGradient>
       
       <View style={styles.listView}>
+        <EditScreenInfo/>
       </View>
 
       <TouchableOpacity style={styles.floatingButton} activeOpacity={0.7} onPress={onShowPopup}>
@@ -72,8 +73,10 @@ const styles = StyleSheet.create({
 
   listView : {
     width: "100%",
-    height: "60%",
-    backgroundColor: "#500076"
+    height: "66%",
+    backgroundColor: "#501471",
+    alignContent: "center",
+    justifyContent: "center"
   },
 
   floatingButton : {
