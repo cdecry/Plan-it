@@ -1,4 +1,7 @@
 import { Modal, Dimensions, StyleSheet, View, Text, TouchableOpacity, TouchableWithoutFeedback, TextInput } from 'react-native'
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useState } from 'react';
+import { Button, Pressable } from 'react-native';
 
 let windowHeight = Dimensions.get('window').height;
 let popupHeight = 0.45*windowHeight;
@@ -35,6 +38,44 @@ let popupHeight = 0.45*windowHeight;
 
 const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), addItem : (VoidFunction) }) => {
 
+    const defaultTimeArr = (new Date()).toLocaleTimeString().split(':');
+    const defaultAMPM = defaultTimeArr[2].split(' ')[1];
+    const defaultTime = defaultTimeArr[0] + ':' + defaultTimeArr[1] + ' ' + defaultAMPM;
+
+    const [pickedDate, setDate] = useState(new Date());
+    const [pickedTime, setTime] = useState(defaultTime);
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const showTimePicker = () => {
+        setTimePickerVisibility(true);
+    };
+
+    const hideTimePicker = () => {
+        setTimePickerVisibility(false);
+    };
+
+    const handleConfirmDate = (date: any) => {
+        setDate(date);
+        hideDatePicker();
+    };
+
+    const handleConfirmTime = (time: Date) => {
+        const timeArr = time.toLocaleTimeString().split(':');
+        const amPM = timeArr[2].split(' ')[1];
+        const newTime = timeArr[0] + ':' + timeArr[1] + ' ' + amPM;
+        setTime(newTime);
+        hideTimePicker();
+    };
+
     const addItem = () => {
         props.addItem()
         props.closePopup()
@@ -54,32 +95,37 @@ const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), ad
                 >
                   <View style={styles.centeredView}>
                     <TouchableOpacity style={styles.modalView} activeOpacity={1}>
-                          <Text style={styles.modalText}> Item Name </Text>
+                          <Text style={styles.modalText}>Task Name </Text>
                             <TextInput 
                               style={styles.transactionInput}
                               keyboardType="default"
                               textAlign='center'
-                              maxLength={10}
                             />
 
-                            <Text style={styles.modalText}> Date (DD/YY/MM) </Text>
-                            <TextInput 
-                              style={styles.transactionInput}
-                              keyboardType="number-pad"
-                              textAlign='center'
-                              maxLength={10}
+                            <Text style={styles.modalText}> Date (YY/MM/DD) </Text>
+                            <Pressable style={styles.transactionInput} onPress={showDatePicker}>
+                                <Text style={styles.dateTimeText}>{pickedDate.toLocaleDateString()}</Text>
+                            </Pressable>
+                            <DateTimePickerModal
+                                isVisible={isDatePickerVisible}
+                                mode="date"
+                                onConfirm={handleConfirmDate}
+                                onCancel={hideDatePicker}
                             />
 
                             <Text style={styles.modalText}> Time Due (24 Hour) </Text>
-                            <TextInput 
-                              style={styles.transactionInput}
-                              keyboardType="number-pad"
-                              textAlign='center'
-                              maxLength={10}
+                            <Pressable style={styles.transactionInput} onPress={showTimePicker}>
+                                <Text style={styles.dateTimeText}>{pickedTime}</Text>
+                            </Pressable>
+                            <DateTimePickerModal
+                                isVisible={isTimePickerVisible}
+                                mode="time"
+                                onConfirm={handleConfirmTime}
+                                onCancel={hideTimePicker}
                             />
 
                           <TouchableOpacity style={styles.addTaskButon} onPress={addItem}>
-                            <Text style={styles.buttonText} > Add </Text>
+                            <Text style={styles.buttonText} > ADD TASK </Text>
                           </TouchableOpacity>
 
                       </TouchableOpacity>
@@ -132,6 +178,9 @@ const styles = StyleSheet.create({
       width: "60%"
     },
     transactionInput: {
+        paddingLeft: '1%',
+        paddingRight: '1%',
+      fontSize: '20%',
       backgroundColor: '#E3EFF1',
       marginTop: 0,
       marginBottom: "2%",
@@ -148,9 +197,15 @@ const styles = StyleSheet.create({
         marginTop: "3%"
     },
     buttonText: {
-        marginTop: "8%",
-        marginRight: "5%",
+        fontSize: '25%',
+        marginTop: "7%",
+        textAlign: 'center',
         color: "white"
+    },
+    dateTimeText: {
+        paddingTop: '5%',
+        textAlign: 'center',
+        fontSize: 20,
     }
 
   });

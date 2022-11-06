@@ -10,37 +10,38 @@ import { sendNotification } from '../AppNotifications';
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
     <View>
-      <View style={styles.helpContainer}>
+        {/* <View style={styles.helpContainer}>
         
 
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
+            <View
+            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+            darkColor="rgba(255,255,255,0.05)"
+            lightColor="rgba(0,0,0,0.05)">
+            <MonoText>{path}</MonoText>
+            </View>
+
+        </View> */}
+
+        <View style = {styles.container2}>
+            <View style={ styles.waterContainer}> 
+            <Image style={styles.imageContainer}
+            source = {require('./drop.png')}
+            /> 
+
+            <Text
+            style={styles.getStartedText}
+                >
+                # hours  
+            </Text>
+            <Text style={styles.bodyText}
+            >since you drank water</Text>
+        <View>
+
         </View>
 
-            </View>
-    <View style = {styles.container2}>
-      <View style={ styles.waterContainer}> 
-      <Image style={styles.imageContainer}
-      source = {require('./drop.png')}
-      /> 
-
-      <Text
-      style={styles.getStartedText}
-          >
-        # hours  
-      </Text>
-      <Text style={styles.bodyText}
-      >since you drank water</Text>
-      <View>
-
-      </View>
 
 
-
-      </View>
+        </View>
 
 <View style={ styles.foodContainer}> 
 <Image style={styles.imageContainer2}
@@ -159,16 +160,19 @@ width: 17,
 
   },
 
-imageContainer2 : {height: 27,
-  marginTop: 6,
-  marginBottom: 6,
+imageContainer2 : {
+    height: 27,
+    marginTop: 6,
+    marginBottom: 6,
 marginRight: 80,
 imageAlign: 'left',
 width: 36,
 
   },
-  container2 : {flexDirection:'row',
-
+  container2 : {
+    flexDirection:'row',
+    height: '100%',
+    backgroundColor: 'rgba(255, 0, 255, 0.0)',
   }
 
 });
