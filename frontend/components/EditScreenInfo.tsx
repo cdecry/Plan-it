@@ -1,9 +1,11 @@
 import * as WebBrowser from 'expo-web-browser';
-import { StyleSheet, TouchableOpacity ,Image} from 'react-native';
+import { StyleSheet, TouchableOpacity , Image} from 'react-native';
 
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
+
+
 
 
 
@@ -38,8 +40,6 @@ export default function EditScreenInfo({ path }: { path: string }) {
 
       </View>
 
-
-
       </View>
 
 <View style={ styles.foodContainer}> 
@@ -54,6 +54,7 @@ style={styles.getStartedText}
 </Text>
 <Text style={styles.bodyText}
 >since you ate food</Text>
+
 <View>
 
 </View>
@@ -62,23 +63,32 @@ style={styles.getStartedText}
 
       
     </View>
-
-      <View style={styles.helpContainer}>
-        <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-          <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-            Tap here if your app doesn't automatically update after making changes
-          </Text>
+    
+    <TouchableOpacity style={styles.addbutton} activeOpacity={0.7}>
+    <Image style={styles.imageContainer3}
+      source = {require('./add.png')}
+      /> 
+          <View style={styles.helpContainer} />
+          
         </TouchableOpacity>
-      </View>
     </View>
+    
+
+
+    
   );
 }
+
+
+
 
 function handleHelpPress() {
   WebBrowser.openBrowserAsync(
     'https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet'
   );
 }
+
+
 
 const styles = StyleSheet.create({
   getStartedContainer: {
@@ -169,6 +179,18 @@ width: 36,
   },
   container2 : {flexDirection:'row',
 
-  }
+  },
+  addbutton : {height: 30,
+    width:60,
+    borderRadius: 40/2,
+    position: 'absolute', top: 310, left: 333, right: 0, bottom: 0
+  },
+  imageContainer3 : {height: 33,
+    marginTop: 6,
+    marginBottom: 6,
+  imageAlign: 'left',
+  width: 33,
+  
+    },
 
 });
