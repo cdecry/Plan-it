@@ -3,6 +3,8 @@ import { useState } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import { LinearGradient } from 'expo-linear-gradient';
+import { getData, storeData } from '../components/AddTaskModal';
+import { sendNotification } from '../AppNotifications';
 
 let windowHeight = Dimensions.get('window').height;
 
@@ -11,6 +13,9 @@ export default function TabTwoScreen() {
   const defaultTimeArr = (new Date()).toLocaleTimeString().split(':');
   const defaultAMPM = defaultTimeArr[2].split(' ')[1];
   const defaultTime = defaultTimeArr[0] + ':' + defaultTimeArr[1] + ' ' + defaultAMPM;
+
+  const [eatInterval, setEatInterval] = useState(4);
+  const [drinkInterval, setDrinkInterval] = useState(2);
 
   const [pickedTime, setTime] = useState(defaultTime);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
@@ -33,6 +38,35 @@ export default function TabTwoScreen() {
   const hideSleepTimePicker = () => {
     setSleepTimePickerVisibility(false);
   };
+  
+  storeData(-7, eatInterval);
+  storeData(-8, drinkInterval);
+  
+  getData(-7).then(num => {
+    console.log('food int ' + num);
+  })
+  getData(-77).then(num => {
+    getData(-7).then(inter => {
+        if (((new Date()).getDate() - num) >= inter)
+            sendNotification(global.token, "Plan-it!", "Please remember to eat!");
+      })
+    
+  })
+ 
+  getData(-8).then(num => {
+    console.log('water int ' + num);
+  })
+  getData(-88).then(num => {
+    getData(-8).then(inter => {
+        if (((new Date()).getDate() - num) >= inter)
+            sendNotification(global.token, "Plan-it!", "Please remember to stay hydrated!");
+        else
+            console.log(num);
+      })
+    
+  })
+
+
 
   const handleConfirmTime = (time: Date) => {
     const timeArr = time.toLocaleTimeString().split(':');
@@ -66,6 +100,7 @@ export default function TabTwoScreen() {
           style={styles.transactionInput}
           keyboardType="number-pad"
           textAlign='center'
+            onChangeText={text => setDrinkInterval(Number(text))}
           returnKeyType='done'
         />
 
@@ -74,6 +109,7 @@ export default function TabTwoScreen() {
           style={styles.transactionInput}
           keyboardType="number-pad"
           textAlign='center'
+          onChangeText={text => setEatInterval(Number(text))}
           returnKeyType='done'
         />
 
@@ -170,3 +206,7 @@ const styles = StyleSheet.create({
     color: "black"
   },
 });
+function storeDataAsNumber(arg0: number, eatInterval: number) {
+    throw new Error('Function not implemented.');
+}
+

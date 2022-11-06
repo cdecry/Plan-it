@@ -19,6 +19,10 @@ Notifications.setNotificationHandler({
 
   declare global {
     var token: string;
+    var foodHours: number; // -7
+    var waterHours: number;// -8
+    var lastEaten: number;// -77
+    var lastHydrated: number; // -88
   }
 
 export default function App() {
@@ -48,6 +52,15 @@ export default function App() {
                 }
             });
         }
+
+
+        getDataAsNumber(-7).then(num => {
+
+            console.log('food inervals: ' + num);
+            }
+        );
+
+
     }, []);
     async function registerForPushNotificationsAsync() {
         let token;
