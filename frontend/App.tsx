@@ -6,6 +6,7 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import * as Notifications from 'expo-notifications';
 import { useEffect } from 'react';
+import { storeData, storeNumberData } from './components/AddTaskModal';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -22,7 +23,9 @@ Notifications.setNotificationHandler({
 
 export default function App() {
     useEffect(() => {
-        registerForPushNotificationsAsync().catch(error => console.log('error: ', error));;
+        registerForPushNotificationsAsync().catch(error => console.log('error: ', error));
+        storeNumberData(-1, 0);
+        global.dataList = [];
     }, []);
     async function registerForPushNotificationsAsync() {
         let token;

@@ -40,9 +40,10 @@ const styles = StyleSheet.create({
       bottomPadding: '50%',
       alignItems: 'center',
       backgroundColor: "#212121",
-      height: "20%",
+      height: 0.1*windowHeight,
       width: "90%",
       borderRadius: 15,
+      marginBottom: "3%"
   
     },
     taskItemOpacity: {
