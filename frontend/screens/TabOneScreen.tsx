@@ -1,29 +1,15 @@
 import React, { useState } from 'react';
 import { StyleSheet, Dimensions, Button, TouchableOpacity, Image } from 'react-native';
-import { useState } from 'react'
 
 import FoodWaterStatsComp from '../components/FoodWaterStatsComp';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import AddTaskModal from '../components/AddTaskModal'
-
 let windowHeight = Dimensions.get('window').height;
 import AddTaskModal from '../components/AddTaskModal';
 let windowWidth = Dimensions.get('window').width;
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
-
-    const [modalVisible, setModalVisible] = useState(false);
-
-    const onShowPopup = () => {
-      setModalVisible(true)
-    }
-
-    const onClosePopup = () => {
-      setModalVisible(false)
-    }
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
 
@@ -76,7 +62,7 @@ const styles = StyleSheet.create({
     height: "40%",
     alignContent: "flex-end",
     justifyContent: "flex-end",
-    alignItems: "center",
+    alignItems: "center"
   },
   titleText: {
     fontSize: 20,
@@ -107,5 +93,5 @@ const styles = StyleSheet.create({
     marginTop: 6,
     marginBottom: 6,
     imageAlign: 'left',
-    },
-});
+    }
+})
