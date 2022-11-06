@@ -67,7 +67,7 @@ function BottomTabNavigator() {
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
           title: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={'green'} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={'white'} />,
         })}
       />
       <BottomTab.Screen
@@ -75,7 +75,7 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: 'Settings',
-          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={'green'} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={'white'} />,
         }}
       />
     </BottomTab.Navigator>

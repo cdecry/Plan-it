@@ -4,73 +4,97 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
+import React, { useState } from 'react'
 
 import { sendNotification } from '../AppNotifications';
+import { Image } from 'react-native';
 
-export default function EditScreenInfo({ path }: { path: string }) {
+
+export default function EditScreenInfo() {
+
+  const [hasCheck, setHasCheck] = useState(false);
+
+  const check = () => {
+    setHasCheck(!hasCheck);
+  }
+
   return (
-    <View>
-      <View style={styles.getStartedContainer}>
+    <View style={styles.getStartedContainer}>
+      <TouchableOpacity style={styles.componentOpacity} onPress={check}>
         <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Open up the code for this screen:
+          style={styles.timeStyle}
+          darkColor="#ffffff"
+        >
+          Task: submit reflction
         </Text>
 
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
-        </View>
+        {hasCheck &&
+          <Image source={require('./check.png')} style={{ width: 32, height: 32, marginLeft: 20, position: 'absolute', top: 30, left: 8, right: 0, bottom: 0 }}
+          />}
+
+        <Image source={require('./square.png')} style={{ width: 35, height: 35, marginLeft: 20, }}
+        />
+
 
         <Text
           style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Change any of the text, save the file, and your app will automatically update.
+          darkColor="#ffffff"
+        >
+          Date, Time: sunday @ 11:59 pm
         </Text>
-      </View>
 
-      <View style={styles.helpContainer}>
-        <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-          <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-            Tap here if your app doesn't automatically update after making changes
-          </Text>
-        </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
     </View>
-  );
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet'
   );
 }
 
 const styles = StyleSheet.create({
   getStartedContainer: {
+    topPadding: '30%',
+    bottomPadding: '50%',
     alignItems: 'center',
-    marginHorizontal: 50,
+    backgroundColor: "#312837",
+    height: "25%",
+    width: "90%",
+    borderRadius: 15,
+
+  },
+  componentOpacity: {
+    width: "100%",
+    height: "100%",
+    justifyContent: 'center',
+    alignContent: 'center'
   },
   homeScreenFilename: {
     marginVertical: 7,
+    alignContainer: 'center'
   },
   codeHighlightContainer: {
-    borderRadius: 3,
-    paddingHorizontal: 4,
+    borderRadius: 10,
+    paddingHorizontal: 5,
+    width: '80%',
+    alignContent: 'center'
+
+
   },
   getStartedText: {
-    fontSize: 17,
-    lineHeight: 24,
+    fontSize: 14,
+    opacity: 0.8,
     textAlign: 'center',
+    fontFamily: 'Avenir',
+  },
+
+  timeStyle: {
+    fontSize: 19,
+    textAlign: 'center',
+    fontFamily: 'Avenir',
+    innerHeight: '10%'
   },
   helpContainer: {
     marginTop: 15,
     marginHorizontal: 20,
     alignItems: 'center',
+
   },
   helpLink: {
     paddingVertical: 15,

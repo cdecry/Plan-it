@@ -20,7 +20,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       </LinearGradient>
       
       <View style={styles.listView}>
-      
+        <EditScreenInfo/>
       </View>
 
     </View>
@@ -32,15 +32,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%"
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
   linearGradient: {
     width: "100%",
     height: "34%"
@@ -48,6 +39,8 @@ const styles = StyleSheet.create({
   listView : {
     width: "100%",
     height: "66%",
-    backgroundColor: "#501471"
+    backgroundColor: "#501471",
+    alignContent: "center",
+    justifyContent: "center"
   },
 });
