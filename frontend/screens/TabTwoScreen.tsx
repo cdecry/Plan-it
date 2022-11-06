@@ -98,17 +98,19 @@ export default function TabTwoScreen() {
         <Text style={styles.inputText}> Water Interval (Hours) </Text>
         <TextInput
           style={styles.transactionInput}
-          keyboardType="numeric"
+          keyboardType="number-pad"
           textAlign='center'
             onChangeText={text => setDrinkInterval(Number(text))}
+          returnKeyType='done'
         />
 
         <Text style={styles.inputText}> Food Interval (Hours) </Text>
         <TextInput
           style={styles.transactionInput}
-          keyboardType="numeric"
+          keyboardType="number-pad"
           textAlign='center'
           onChangeText={text => setEatInterval(Number(text))}
+          returnKeyType='done'
         />
 
         <Text style={styles.inputText}> Wake Up Time </Text>
