@@ -36,6 +36,19 @@ const TaskListComponent: React.FC = ({}) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
+
+        global.dataList = [];
+        getData(-1).then(ind => {
+            for (let i = 0; i < ind; i++) {
+                getData(i).then(objStr => {
+                    if (JSON.parse(JSON.stringify(objStr != null)))
+                        global.dataList.push(JSON.parse(JSON.stringify(objStr)));
+                    // console.log("CHECKING EACH" + JSON.stringify(JSON.parse(JSON.stringify(objStr))));
+                    // console.log("GLOBAL: "+ global.dataList);
+                }).catch(error => {console.log(error)});
+            }
+            
+        }).catch(error=>{console.log(error)});
         wait(2000).then(() => setRefreshing(false));
     }, []);
 
@@ -47,7 +60,11 @@ const TaskListComponent: React.FC = ({}) => {
             <FlatList
                     contentContainerStyle={{ paddingBottom: 20 }}
                     data={DATA as unknown as readonly any[] | null | undefined}
-                    renderItem={({item}) => <TaskItem task={item.name} date={item.date} time={item.time}/> }
+                    renderItem={({item}) => (item) && <TaskItem task={item.name} date={item.date} time={item.time}/> }
+                    refreshControl={<RefreshControl
+                                    colors={["#2493A1", "#2493A1"]}
+                                    refreshing={refreshing}
+                                    onRefresh={onRefresh} />}
             />
         </SafeAreaView>
     );

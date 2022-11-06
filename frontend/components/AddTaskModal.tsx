@@ -134,15 +134,21 @@ const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), ad
 
     const addItem = () => {
         const obj = JSON.parse('{"name":"' + taskName + '", "date":"' + pickedDate + '", "time":"' + pickedTime + '"}');
-        storeData(index, obj).then(() => {
-            getData(0).then((value) => {
-                console.log(value);
-            })
-        });
+        
+        // storeData(index, obj).then(() => {
+        //     getData(0).then((value) => {
+        //         console.log(value);
+        //     })
+        // });
 
-        increaseIndex(index + 1);
+        // increaseIndex(index + 1);
 
         getData(-1).then(ind => {
+            storeData(ind, obj).then(() => {
+                getData(0).then((value) => {
+                    console.log(value);
+                })
+            });
             getData(ind).then(objStr => {
                 global.dataList.push(JSON.parse(JSON.stringify(objStr)));
                 // console.log("CHECKING EACH" + JSON.stringify(JSON.parse(JSON.stringify(objStr))));
@@ -150,6 +156,9 @@ const AddTaskModal = (props: {visible : boolean, closePopup : (VoidFunction), ad
             }).catch(error => {console.log(error)});
         }).catch(error=>{console.log(error)});
 
+
+        increaseIndex(index + 1);
+        
         getData(-1).then(current => {
             storeNumberData(-1, current + 1);
         })
