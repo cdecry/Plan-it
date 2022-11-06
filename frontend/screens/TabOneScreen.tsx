@@ -6,9 +6,10 @@ import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { LinearGradient } from 'expo-linear-gradient';
 
-let windowHeight = Dimensions.get('window').height;
+import TaskItem from '../components/TaskItem'
 import AddTaskModal from '../components/AddTaskModal';
-import EditScreenInfo from '../components/EditScreenInfo';
+
+let windowHeight = Dimensions.get('window').height;
 let windowWidth = Dimensions.get('window').width;
 
 
@@ -40,7 +41,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       </LinearGradient>
       
       <View style={styles.listView}>
-        <EditScreenInfo/>
+        <TaskItem task="Submit project" date="Nov 6, 2022" time="11:00"/>
       </View>
 
       <TouchableOpacity style={styles.floatingButton} activeOpacity={0.7} onPress={onShowPopup}>
@@ -74,10 +75,11 @@ const styles = StyleSheet.create({
 
   listView : {
     width: "100%",
-    height: "66%",
+    height: "60%",
     backgroundColor: "#501471",
     alignContent: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   floatingButton : {

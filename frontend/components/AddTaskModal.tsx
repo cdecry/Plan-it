@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
         marginTop: "3%"
     },
     buttonText: {
-        fontSize: 25,
+        fontSize: 20,
         marginTop: "7%",
         textAlign: 'center',
         color: "white"
