@@ -151,8 +151,8 @@ const styles = StyleSheet.create({
     modalView: {
       margin: 20,
       paddingTop: 20,
-      backgroundColor: "#E3A9FF",
-      borderRadius: 0.02*popupHeight,
+      backgroundColor: "#D17BFA",
+      borderRadius: 0.03*popupHeight,
       padding: 20,
       alignItems: "center",
       shadowColor: "#000",
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     },
     addTaskButon: {
         height: "18%",
-        borderRadius: 0.05*popupHeight,
+        borderRadius: 0.03*popupHeight,
         backgroundColor: "#8936D3",
         width: "80%",
         alignItems: "center",
