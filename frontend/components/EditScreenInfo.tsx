@@ -43,10 +43,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
                 </View>
             </View>
             
-            <TouchableOpacity style={styles.addbutton} activeOpacity={0.7}>
-                <Image style={styles.imageContainer3} source = {require('./add.png')}/> 
-                <View style={styles.helpContainer} />
-            </TouchableOpacity>
+            
         </View>
     );
 }
